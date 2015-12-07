@@ -34,7 +34,7 @@ require('./services');
 },{}],3:[function(require,module,exports){
 arguments[4][2][0].apply(exports,arguments)
 },{"dup":2}],4:[function(require,module,exports){
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n\r\n</div>");}]);
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);
 },{}],5:[function(require,module,exports){
 'use strict';
 

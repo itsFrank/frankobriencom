@@ -1,1 +1,1 @@
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n\r\n</div>");}]);
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);
