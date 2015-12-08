@@ -1,0 +1,8 @@
+DESIGN
+    - Angularize the navbar
+
+CONTENT
+
+OTHER
+    - add gulp-open to JangularGen
+    - update gulfile in JangularGen

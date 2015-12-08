@@ -6,6 +6,7 @@ var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var concat = require('gulp-concat')
 var templateCache = require('gulp-angular-templatecache')
+var open = require('gulp-open')
 
 // Connect task - launch local dev server
 gulp.task('connect', function () {
@@ -13,6 +14,14 @@ gulp.task('connect', function () {
         root: 'public',
         port: 4000
     })
+})
+
+gulp.task('open', function(){
+    gulp.src('')
+        .pipe(open({
+            app: 'chrome',
+            uri: 'http://localhost:4000'
+        }));
 })
 
 // Browserfy task - Concat js files with require syntax
@@ -68,4 +77,4 @@ gulp.task('watch', function() {
 })
 
 //default task
-gulp.task('default', ['connect', 'html', 'vendor-css', 'browserify', 'sass', 'watch'])
+gulp.task('default', ['connect', 'html', 'vendor-css', 'browserify', 'sass', 'watch', 'open'])
