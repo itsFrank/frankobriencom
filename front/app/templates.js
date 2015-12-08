@@ -1,1 +1,2 @@
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("directives/main-navbar/main-navbar.html","<div id=\"main-navbar-container\">\r\n    <p>This will be the navbar directive</p>\r\n</div>\r\n");
+$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);

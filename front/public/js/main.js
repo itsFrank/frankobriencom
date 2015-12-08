@@ -27,15 +27,42 @@ require('./views');
 require('./directives');
 require('./services');
 
-},{"./directives":2,"./services":3,"./templates":4,"./views":7,"angular":11,"angular-route":9}],2:[function(require,module,exports){
+},{"./directives":2,"./services":5,"./templates":6,"./views":9,"angular":13,"angular-route":11}],2:[function(require,module,exports){
+'use strict';
+
+require('./main-navbar');
+
+},{"./main-navbar":3}],3:[function(require,module,exports){
+'use strict';
+
+require('./main-navbar.directive');
+
+},{"./main-navbar.directive":4}],4:[function(require,module,exports){
+'use strict';
+
+var app = require('angular').module('app');
+
+app.directive('mainNavbar', function() {
+    return {
+        templateUrl: 'directives/main-navbar/main-navbar.html',
+        restrict: 'AE',
+        scope: {},
+        controller: ['$scope', function($scope) {
+
+        }],
+        link: function(scope, element, attrs, tabsCtrl) {
+
+        }
+    };
+})
+},{"angular":13}],5:[function(require,module,exports){
 'use strict';
 
 
-},{}],3:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],4:[function(require,module,exports){
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("directives/main-navbar/main-navbar.html","<div id=\"main-navbar-container\">\r\n    <p>This will be the navbar directive</p>\r\n</div>\r\n");
+$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n</div>\r\n");}]);
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var app = require('angular').module('app');
@@ -45,17 +72,17 @@ app.controller('homeController', ['$scope', function($scope){
 
 
 }]);
-},{"angular":11}],6:[function(require,module,exports){
+},{"angular":13}],8:[function(require,module,exports){
 'use strict';
 
 require('./home.controller');
 
-},{"./home.controller":5}],7:[function(require,module,exports){
+},{"./home.controller":7}],9:[function(require,module,exports){
 'use strict';
 
 require('./home');
 
-},{"./home":6}],8:[function(require,module,exports){
+},{"./home":8}],10:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -1048,11 +1075,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":8}],10:[function(require,module,exports){
+},{"./angular-route":10}],12:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -30071,8 +30098,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":10}]},{},[1]);
+},{"./angular":12}]},{},[1]);
