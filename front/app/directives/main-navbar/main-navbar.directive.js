@@ -7,8 +7,17 @@ app.directive('mainNavbar', function() {
         templateUrl: 'directives/main-navbar/main-navbar.html',
         restrict: 'AE',
         scope: {},
-        controller: ['$scope', function($scope) {
+        controller: ['$scope', '$window', function($scope, $window) {
+            //Toggles
+            $scope.isToggle = false;
 
+            //Watch width changes
+            angular.element($window).bind('resize', function () {
+                if ($window.innerWidth > 768 && $scope.isToggle) {
+                    $scope.isToggle = false;
+                    $scope.$apply()
+                }
+            });
         }],
         link: function(scope, element, attrs, tabsCtrl) {
 
