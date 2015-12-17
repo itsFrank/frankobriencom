@@ -1,10 +1,162 @@
+$background-grey-dark: #1a1a1a;
+$background-grey-light: #252525;
+
+$text-grey: rgb(200, 200, 200);
+
+$main-grey      : rgb(40, 44, 52);
+$main-grey-light: rgb(40, 50, 60);
+$main-grey-dark : rgb(33, 37, 43);
+
+$main-blue        : #0099ff;
+$main-blue-light  : #33ccff;
+$main-blue-dark   : #0066cc;
+
+$main-orange      : #ff9900;
+$main-orange-light: #ffcc33;
+$main-orange-dark : #cc6600;
+
+$main-cyan        : #66ffcc;
+$main-cyan-light  : #99ffff;
+$main-cyan-dark   : #33cc99;
+
+.pure-button{
+    border-radius: 1px;
+}
+
+.b-blue {
+    background-color: $main-blue;
+
+    &:hover {
+        background-color: $main-blue-light;
+    }
+
+    &:active {
+        background-color: $main-blue-light;
+    }
+}
+
+body, html {
+    height:  100%;
+    margin:  0px auto;
+    padding: 0px auto;
+
+    background-color: $background-grey-dark;
+}
+
+#main-container {
+    max-width: 1000px;
+    height:     auto;
+    min-height: 100%;
+    margin:     0px auto;
+    padding:    20px;
+
+    color: $text-grey;
+    background-color: $main-grey-dark;
+ }
+
+p, a, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.test-div-full-width {
+    display: block;
+    width: 100%;
+    height: 20px;
+    background-color: $main-cyan;
+}
+
+#game-of-life-container {
+
+    padding: 30px 0;
+    background-color: $main-grey-light;
+
+    #game-of-life-table {
+
+        padding: 55px;
+        background-color: $background-grey-dark;
+        border-top: 5px solid $background-grey-dark;
+        border-left: 5px solid $background-grey-dark;
+        border-right: 5px solid $background-grey-dark;
+        margin-left: 30px;
+
+        .gol-tile {
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            background-color: $main-grey-light;
+            margin: 5px;
+        }
+
+        .alive {
+            background-color: $main-cyan-dark;
+        }
+    }
+
+    #gol-menu {
+        background-color: $background-grey-dark;
+        width: 100%;
+        height: 100%;
+
+        tbody{
+            padding: 10px 5px;
+        }
+
+        a {
+            margin: 10px 0;
+            width: 120px;
+        }
+    }
+
+
+
+}
+
 #main-navbar-container {
 
+    .pure-menu-link {
+        padding: 15px;
+        color: $main-blue;
+
+        &:hover {
+            background-color: $main-grey-light;
+        }
+
+        &:focus {
+            background-color: $main-grey;
+        }
+    }
+
+    .pure-menu-heading {
+        padding: 15px;
+        color: $main-blue;
+        text-transform: none;
+    }
+
     .custom-wrapper {
-        background-color: #ffd390;
+        background-color: $main-grey-dark;
         margin-bottom: 1em;
         -webkit-font-smoothing: antialiased;
-        height: 2.1em;
+        height: 3.0em;
         overflow: hidden;
         -webkit-transition: height 0.5s;
         -moz-transition: height 0.5s;
@@ -31,7 +183,7 @@
     }
 
     .custom-toggle .bar {
-        background-color: #777;
+        background-color: $main-blue;
         display: block;
         width: 20px;
         height: 2px;
@@ -82,9 +234,17 @@
 
 #home-container {
 
-    h1 {
-        color: blue;
+    #main-title-container{
+
+        padding: 20px;
+
+    .title-inline {
+        display: inline;
     }
 
+    #my-name {
+        display: inline;
+        color: $main-blue;
+    }
 }
-
+}

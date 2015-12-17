@@ -38,10 +38,11 @@ gulp.task('browserify', function() {
 //Concatenate all sass files in style.scss
 gulp.task('sass-concat', function(){
     return gulp.src([
+        'app/globals/colors.scss',
+        'app/globals/**/*.scss',
         'app/directives/**/*.scss',
         'app/services/**/*.scss',
-        'app/views/**/*.scss',
-        'app/globals/**/*.scss'
+        'app/views/**/*.scss'
     ]).pipe(concat('style.scss'))
         .pipe(gulp.dest('./app'))
 })

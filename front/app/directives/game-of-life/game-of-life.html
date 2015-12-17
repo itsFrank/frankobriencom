@@ -1,0 +1,35 @@
+<div id="game-of-life-container">
+
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+            <table id="game-of-life-table">
+                <tr ng-repeat="row in grid">
+                    <td ng-repeat="tile in row">
+                        <div class="gol-tile" ng-click="tile.alive = !tile.alive" ng-class="{alive : tile.alive}"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="pure-u-1 pure-u-md-2-3">
+            <table id="gol-menu">
+                <tr>
+                    <td><a class="b-blue pure-button" ng-click="resetGrid()">Randomize</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a class="b-blue pure-button" ng-click="clearGrid()">Clear</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a class="b-blue pure-button" ng-click="toggle_game_run()">{{running ? 'Pause' : 'Play'}}</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>

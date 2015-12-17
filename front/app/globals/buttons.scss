@@ -1,0 +1,15 @@
+.pure-button{
+    border-radius: 1px;
+}
+
+.b-blue {
+    background-color: $main-blue;
+
+    &:hover {
+        background-color: $main-blue-light;
+    }
+
+    &:active {
+        background-color: $main-blue-light;
+    }
+}

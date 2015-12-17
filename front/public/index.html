@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="/css/vendor.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+<!-- <body background="res/images/background.png" style="background-repeat: repeat"> -->
 <body>
-    
+
     <main-navbar></main-navbar>
-    <div ng-view></div>
+    <div id="main-container" class="pure-g">
+        <div class="pure-u-1">
+            <div ng-view></div>
+        </div>
+    </div>
 
 </body>
 <script src="/js/main.js"></script>

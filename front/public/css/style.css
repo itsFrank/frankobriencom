@@ -1,8 +1,100 @@
+.pure-button {
+  border-radius: 1px; }
+
+.b-blue {
+  background-color: #0099ff; }
+  .b-blue:hover {
+    background-color: #33ccff; }
+  .b-blue:active {
+    background-color: #33ccff; }
+
+body, html {
+  height: 100%;
+  margin: 0px auto;
+  padding: 0px auto;
+  background-color: #1a1a1a; }
+
+#main-container {
+  max-width: 1000px;
+  height: auto;
+  min-height: 100%;
+  margin: 0px auto;
+  padding: 20px;
+  color: #c8c8c8;
+  background-color: #21252b; }
+
+p, a, h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.test-div-full-width {
+  display: block;
+  width: 100%;
+  height: 20px;
+  background-color: #66ffcc; }
+
+#game-of-life-container {
+  padding: 30px 0;
+  background-color: #28323c; }
+  #game-of-life-container #game-of-life-table {
+    padding: 55px;
+    background-color: #1a1a1a;
+    border-top: 5px solid #1a1a1a;
+    border-left: 5px solid #1a1a1a;
+    border-right: 5px solid #1a1a1a;
+    margin-left: 30px; }
+    #game-of-life-container #game-of-life-table .gol-tile {
+      display: inline-block;
+      height: 15px;
+      width: 15px;
+      background-color: #28323c;
+      margin: 5px; }
+    #game-of-life-container #game-of-life-table .alive {
+      background-color: #33cc99; }
+  #game-of-life-container #gol-menu {
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 100%; }
+    #game-of-life-container #gol-menu tbody {
+      padding: 10px 5px; }
+    #game-of-life-container #gol-menu a {
+      margin: 10px 0;
+      width: 120px; }
+
+#main-navbar-container .pure-menu-link {
+  padding: 15px;
+  color: #0099ff; }
+  #main-navbar-container .pure-menu-link:hover {
+    background-color: #28323c; }
+  #main-navbar-container .pure-menu-link:focus {
+    background-color: #282c34; }
+#main-navbar-container .pure-menu-heading {
+  padding: 15px;
+  color: #0099ff;
+  text-transform: none; }
 #main-navbar-container .custom-wrapper {
-  background-color: #ffd390;
+  background-color: #21252b;
   margin-bottom: 1em;
   -webkit-font-smoothing: antialiased;
-  height: 2.1em;
+  height: 3.0em;
   overflow: hidden;
   -webkit-transition: height 0.5s;
   -moz-transition: height 0.5s;
@@ -21,7 +113,7 @@
   right: 0;
   display: none; }
 #main-navbar-container .custom-toggle .bar {
-  background-color: #777;
+  background-color: #0099ff;
   display: block;
   width: 20px;
   height: 2px;
@@ -54,5 +146,10 @@
   #main-navbar-container .custom-toggle {
     display: block; } }
 
-#home-container h1 {
-  color: blue; }
+#home-container #main-title-container {
+  padding: 20px; }
+  #home-container #main-title-container .title-inline {
+    display: inline; }
+  #home-container #main-title-container #my-name {
+    display: inline;
+    color: #0099ff; }

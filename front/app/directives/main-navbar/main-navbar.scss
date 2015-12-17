@@ -1,10 +1,29 @@
 #main-navbar-container {
 
+    .pure-menu-link {
+        padding: 15px;
+        color: $main-blue;
+
+        &:hover {
+            background-color: $main-grey-light;
+        }
+
+        &:focus {
+            background-color: $main-grey;
+        }
+    }
+
+    .pure-menu-heading {
+        padding: 15px;
+        color: $main-blue;
+        text-transform: none;
+    }
+
     .custom-wrapper {
-        background-color: #ffd390;
+        background-color: $main-grey-dark;
         margin-bottom: 1em;
         -webkit-font-smoothing: antialiased;
-        height: 2.1em;
+        height: 3.0em;
         overflow: hidden;
         -webkit-transition: height 0.5s;
         -moz-transition: height 0.5s;
@@ -31,7 +50,7 @@
     }
 
     .custom-toggle .bar {
-        background-color: #777;
+        background-color: $main-blue;
         display: block;
         width: 20px;
         height: 2px;

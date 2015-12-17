@@ -27,17 +27,128 @@ require('./views');
 require('./directives');
 require('./services');
 
-},{"./directives":2,"./services":5,"./templates":6,"./views":9,"angular":13,"angular-route":11}],2:[function(require,module,exports){
+},{"./directives":4,"./services":7,"./templates":8,"./views":11,"angular":15,"angular-route":13}],2:[function(require,module,exports){
+'use strict';
+
+var app = require('angular').module('app');
+
+app.directive('gameOfLife', function() {
+    return {
+        templateUrl: 'directives/game-of-life/game-of-life.html',
+        restrict: 'AE',
+        scope: {},
+        controller: ['$scope', '$interval', function($scope, $interval) {
+            $scope.size = 10;
+            $scope.interval = 1000;
+            $scope.running = false;
+            $scope.grid = [];
+            $scope.game_handle = undefined;
+
+
+            $scope.toggle_game_run = function(){
+                if ($scope.running) {
+                    $scope.running = false;
+                    $interval.cancel($scope.game_handle);
+                    $scope.game_handle = undefined;
+                } else {
+                    $scope.running = true;
+                    $scope.game_handle = $interval( function(){ $scope.gol_loop(); }, $scope.interval);
+                }
+            };
+
+            $scope.mod = function(n, m) {
+                return ((n % m) + m) % m;
+            };
+
+            $scope.clearGrid = function(){
+                for (var i = 0; i < $scope.size; i++) {
+                    for (var j = 0; j < $scope.size; j++) {
+                        $scope.grid[i][j].alive = false;
+                    }
+                }
+            };
+
+            $scope.tileFactory = function(initialState, i, j){
+                return {
+                    alive: initialState,
+                    next: true,
+                    index: {i: i, j: j},
+                    calcNextGen: function(){
+                        var count = 0;
+                        for (var x = -1; x < 2; x++){
+                            for (var y = -1; y < 2; y++){
+                                if (x === 0 && y === 0) {}
+                                else if ($scope.grid[$scope.mod(this.index.i + x, $scope.size)][$scope.mod(this.index.j + y, $scope.size)].alive) {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count < 2) this.next = false;
+                        else if (count == 2 && this.alive) this.next = true;
+                        else if (count == 3) this.next = true;
+                        else this.next = false;
+                    },
+                    setNextGen: function(){
+                        this.alive = this.next;
+                    }
+                };
+            };
+
+            $scope.resetGrid = function(){
+                for (var i = 0; i < $scope.size; i++) {
+                    $scope.grid[i] = [];
+                    for (var j = 0; j < $scope.size; j++) {
+                        $scope.grid[i][j] = $scope.tileFactory(Math.floor(Math.random() * 2) == 1 ? true : false, i, j);
+                    }
+                }
+                for (var i = 0; i < $scope.size; i++) {
+                    for (var j = 0; j < $scope.size; j++) {
+                        $scope.grid[i][j].calcNextGen();
+                    }
+                }
+            };
+
+            $scope.gol_loop = function(){
+                for (var i = 0; i < $scope.size; i++) {
+                    for (var j = 0; j < $scope.size; j++) {
+                        $scope.grid[i][j].calcNextGen();
+                    }
+                }
+
+                for (var i = 0; i < $scope.size; i++) {
+                    for (var j = 0; j < $scope.size; j++) {
+                        $scope.grid[i][j].setNextGen();
+                    }
+                }
+            };
+
+            $scope.resetGrid();
+            $scope.toggle_game_run();
+
+        }],
+        link: function(scope, element, attrs, tabsCtrl) {
+
+        }
+    };
+});
+
+},{"angular":15}],3:[function(require,module,exports){
+'use strict';
+
+require('./game-of-life.directive');
+
+},{"./game-of-life.directive":2}],4:[function(require,module,exports){
 'use strict';
 
 require('./main-navbar');
+require('./game-of-life');
 
-},{"./main-navbar":3}],3:[function(require,module,exports){
+},{"./game-of-life":3,"./main-navbar":5}],5:[function(require,module,exports){
 'use strict';
 
 require('./main-navbar.directive');
 
-},{"./main-navbar.directive":4}],4:[function(require,module,exports){
+},{"./main-navbar.directive":6}],6:[function(require,module,exports){
 'use strict';
 
 var app = require('angular').module('app');
@@ -45,9 +156,9 @@ var app = require('angular').module('app');
 app.directive('mainNavbar', function() {
     return {
         templateUrl: 'directives/main-navbar/main-navbar.html',
-        restrict: 'AE',
-        scope: {},
-        controller: ['$scope', '$window', function($scope, $window) {
+        restrict   : 'AE',
+        scope      : {},
+        controller : ['$scope', '$window', function($scope, $window) {
             //Toggles
             $scope.isToggle = false;
 
@@ -55,7 +166,7 @@ app.directive('mainNavbar', function() {
             angular.element($window).bind('resize', function () {
                 if ($window.innerWidth > 768 && $scope.isToggle) {
                     $scope.isToggle = false;
-                    $scope.$apply()
+                    $scope.$apply();
                 }
             });
         }],
@@ -63,16 +174,17 @@ app.directive('mainNavbar', function() {
 
         }
     };
-})
+});
 
-},{"angular":13}],5:[function(require,module,exports){
+},{"angular":15}],7:[function(require,module,exports){
 'use strict';
 
 
-},{}],6:[function(require,module,exports){
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("directives/main-navbar/main-navbar.html","<div id=\"main-navbar-container\">\r\n<!--[if lte IE 8]>\r\n    <link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css\">\r\n<![endif]-->\r\n<!--[if gt IE 8]><!-->\r\n    <link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css\">\r\n<!--<![endif]-->\r\n<div class=\"custom-wrapper pure-g\" ng-class=\"{open : isToggle}\" id=\"menu\">\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu\">\r\n            <a href=\"#\" class=\"pure-menu-heading custom-brand\">Brand</a>\r\n            <a href=\"#\" class=\"custom-toggle\" ng-class=\"{x : isToggle}\" ng-click=\"isToggle = !isToggle\" id=\"toggle\"><s class=\"bar\"></s><s class=\"bar\"></s></a>\r\n        </div>\r\n    </div>\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu custom-can-transform\" ng-class=\"{\'pure-menu-horizontal\' : !isToggle}\">\r\n            <ul class=\"pure-menu-list\">\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">Home</a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">About</a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">Contact</a></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu custom-menu-3 custom-can-transform\" ng-class=\"{\'pure-menu-horizontal\' : !isToggle}\">\r\n            <ul class=\"pure-menu-list\">\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">Yahoo</a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">W3C</a></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>\r\n");
-$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n <h1>Hello zak</h1>\r\n <p>Frank is a swell dude!</p>\r\n\r\n <a class=\"pure-button\" href=\"#\">A Pure Button</a>\r\n</div>\r\n");}]);
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("directives/game-of-life/game-of-life.html","<div id=\"game-of-life-container\">\r\n\r\n    <div class=\"pure-g\">\r\n        <div class=\"pure-u-1 pure-u-md-1-3\">\r\n            <table id=\"game-of-life-table\">\r\n                <tr ng-repeat=\"row in grid\">\r\n                    <td ng-repeat=\"tile in row\">\r\n                        <div class=\"gol-tile\" ng-click=\"tile.alive = !tile.alive\" ng-class=\"{alive : tile.alive}\"></div>\r\n                    </td>\r\n                </tr>\r\n            </table>\r\n        </div>\r\n        <div class=\"pure-u-1 pure-u-md-2-3\">\r\n            <table id=\"gol-menu\">\r\n                <tr>\r\n                    <td><a class=\"b-blue pure-button\" ng-click=\"resetGrid()\">Randomize</a></td>\r\n                    <td></td>\r\n                </tr>\r\n                <tr>\r\n                    <td><a class=\"b-blue pure-button\" ng-click=\"clearGrid()\">Clear</a></td>\r\n                    <td></td>\r\n                </tr>\r\n                <tr>\r\n                    <td><a class=\"b-blue pure-button\" ng-click=\"toggle_game_run()\">{{running ? \'Pause\' : \'Play\'}}</a></td>\r\n                    <td></td>\r\n                </tr>\r\n                <tr>\r\n                    <td></td>\r\n                    <td></td>\r\n                </tr>\r\n\r\n            </table>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
+$templateCache.put("directives/main-navbar/main-navbar.html","<div id=\"main-navbar-container\">\r\n<!--[if lte IE 8]>\r\n    <link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css\">\r\n<![endif]-->\r\n<!--[if gt IE 8]><!-->\r\n    <link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css\">\r\n<!--<![endif]-->\r\n<div class=\"custom-wrapper pure-g\" ng-class=\"{open : isToggle}\" id=\"menu\">\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu\">\r\n            <a href=\"#\" class=\"pure-menu-heading custom-brand\"><h3>Frank O\'Brien</h3></a>\r\n            <a href=\"#\" class=\"custom-toggle\" ng-class=\"{x : isToggle}\" ng-click=\"isToggle = !isToggle\" id=\"toggle\"><s class=\"bar\"></s><s class=\"bar\"></s></a>\r\n        </div>\r\n    </div>\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu custom-can-transform\" ng-class=\"{\'pure-menu-horizontal\' : !isToggle}\">\r\n            <ul class=\"pure-menu-list\">\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\"><h4>Home</h4></a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\"><h4>Projects</h4></a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\"><h4>About</h4></a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\"><h4>Resume</h4></a></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <div class=\"pure-u-1 pure-u-md-1-3\">\r\n        <div class=\"pure-menu custom-menu-3 custom-can-transform\" ng-class=\"{\'pure-menu-horizontal\' : !isToggle}\">\r\n            <ul class=\"pure-menu-list\">\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">Links</a></li>\r\n                <li class=\"pure-menu-item\"><a href=\"#\" class=\"pure-menu-link\">Contact</a></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>\r\n");
+$templateCache.put("views/home/home.html","<div id=\"home-container\" ngController=\"homeController\">\r\n\r\n<div id=\"main-title-container\">\r\n    <h2>Hi, I\'m </h2>\r\n    <h1 id=\"my-name\">Francis O\'Brien</h1><h2 class=\"title-inline\">, welcome to my site!</h2>\r\n</div>\r\n\r\n<game-of-life></game-of-life>\r\n\r\n</div>\r\n");}]);
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var app = require('angular').module('app');
@@ -82,17 +194,17 @@ app.controller('homeController', ['$scope', function($scope){
 
 
 }]);
-},{"angular":13}],8:[function(require,module,exports){
+},{"angular":15}],10:[function(require,module,exports){
 'use strict';
 
 require('./home.controller');
 
-},{"./home.controller":7}],9:[function(require,module,exports){
+},{"./home.controller":9}],11:[function(require,module,exports){
 'use strict';
 
 require('./home');
 
-},{"./home":8}],10:[function(require,module,exports){
+},{"./home":10}],12:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -1085,11 +1197,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":10}],12:[function(require,module,exports){
+},{"./angular-route":12}],14:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -30108,8 +30220,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":12}]},{},[1]);
+},{"./angular":14}]},{},[1]);

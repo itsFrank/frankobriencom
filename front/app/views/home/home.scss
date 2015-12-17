@@ -1,7 +1,16 @@
 #home-container {
 
-    h1 {
-        color: blue;
+    #main-title-container{
+
+        padding: 20px;
+
+    .title-inline {
+        display: inline;
     }
 
+    #my-name {
+        display: inline;
+        color: $main-blue;
+    }
+}
 }
