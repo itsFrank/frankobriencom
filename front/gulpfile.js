@@ -59,6 +59,8 @@ gulp.task('sass', ['sass-concat', 'sass-compile'])
 gulp.task('vendor-css', function(){
     return gulp.src([
         'node_modules/purecss/build/pure-min.css'
+        ,
+        'node_modules/font-awesome/css/font-awesome.min.css'
     ]).pipe(concat('vendor.css'))
         .pipe(gulp.dest('public/css'))
 })

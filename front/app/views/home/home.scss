@@ -1,16 +1,151 @@
 #home-container {
 
+
+    #projects {
+        min-height: 190px;
+        #projects-buttons{
+            .projects-button{
+                margin: 10px;
+                background-color: $main-grey-dark;
+                color: $text-grey;
+                padding: 10px 20px;
+                border-radius: 10px;
+                text-align: center;
+                svg{
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 5px;
+                    width: 100px;
+                    fill: $text-grey;
+                }
+
+                &:hover {
+                    background-color: $main-red;
+                    color: $main-grey-light;
+                    svg{
+                        fill: $main-grey-light;
+                    }
+                }
+            }
+        }
+    }
     #main-title-container{
 
-        padding: 20px;
+        margin-bottom: 20px;
+        margin-left: 10px;
 
-    .title-inline {
-        display: inline;
+        .title-inline {
+          display: inline;
+        }
+
+        #my-name {
+          display: inline;
+          color: $main-blue;
+        }
     }
 
-    #my-name {
-        display: inline;
-        color: $main-blue;
+    #section-card-grid {
+
+        a {
+            color: $text-grey;
+            &:visited {
+                color: $text-grey;
+            }
+        }
+
+        margin: 20px -10px;
+
+        .section-card-wrapper {
+
+            &>* {
+                height: 100%;
+            }
+        }
+
+        .section-card {
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            background-color: $main-grey-light;
+
+            &:hover {
+                // background-color: $main-grey;
+                h2 {
+                    color: $main-red;
+                }
+            }
+
+
+
+            .img-container {
+                padding: 10px;
+                margin-left: auto;;
+                margin-right: auto;
+                max-width: 310px;
+                background-color: $main-grey-dark;
+
+                img{
+                    width: 100%;
+                    max-width: 310px;
+                }
+            }
+        }
+
+        .links-container {
+
+            h2 {
+                margin: 0;
+            }
+
+            display: inline-block;
+            margin: 0 auto;
+            width: 100%;
+            &>* {
+                margin-left: 4.2%;
+                margin-right: 4.2%;
+                margin-top: 10px;
+            }
+        }
+
+        .itch-container {
+            clear: right;
+            display: inline-block;
+
+            .small {
+                width: 28px;
+            }
+            .big {
+                width: 42px;
+            }
+
+            .itch-logo {
+
+                margin: 0;
+                padding: 2px 0;
+                fill: $text-grey;
+
+                &:hover {
+                        fill: $main-red;
+                }
+            }
+        }
+
+        .link-logo {
+            vertical-align: top;
+            line-height: 0;
+            display: inline-block;
+
+            &:hover {
+                color: $main-red;
+            }
+
+            i.icon-check:before {
+                left: 0;
+                position: absolute;
+                top: -4px;
+            }
+        }
+
     }
-}
+
 }

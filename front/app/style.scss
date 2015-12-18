@@ -5,11 +5,16 @@ $text-grey: rgb(200, 200, 200);
 
 $main-grey      : rgb(40, 44, 52);
 $main-grey-light: rgb(40, 50, 60);
+$main-grey-lighter: #52667a;
 $main-grey-dark : rgb(33, 37, 43);
+
+
 
 $main-blue        : #0099ff;
 $main-blue-light  : #33ccff;
 $main-blue-dark   : #0066cc;
+
+$main-red        : #dd4a4a;
 
 $main-orange      : #ff9900;
 $main-orange-light: #ffcc33;
@@ -43,15 +48,36 @@ body, html {
     background-color: $background-grey-dark;
 }
 
-#main-container {
-    max-width: 1000px;
-    height:     auto;
+#page-wrapper{
+    position: relative;
     min-height: 100%;
-    margin:     0px auto;
+    height: auto !important; /*Cause footer to stick to bottom in IE 6*/
+    height: 100%;
+    margin: 0 auto -100px; /*Allow for footer height*/
+    vertical-align:bottom;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+#main-container {
+    display: block;
+    max-width: 1000px;
+    margin:     auto;
     padding:    20px;
 
     color: $text-grey;
     background-color: $main-grey-dark;
+ }
+
+ .no-mobile {
+     @media screen and (max-width: 768px) {
+         display: none;
+     }
  }
 
 p, a, h1, h2, h3, h4, h5 {
@@ -113,7 +139,7 @@ table {
     }
 
     #gol-menu {
-        background-color: $background-grey-dark;
+        background-color: $main-grey-dark;
         width: 100%;
         height: 100%;
 
@@ -131,7 +157,26 @@ table {
 
 }
 
+#main-footer-container {
+    color: $background-grey-dark;
+    padding: 20px;
+    margin-top: 10px;
+    display: block;
+    background-color: $main-grey;
+}
+
 #main-navbar-container {
+
+    // .center-links-container {
+    //   @media (min-width: 47.999em) {
+    //     max-width: 1040px;
+    //     margin: 0px auto;
+    //
+    //     @media screen and (max-width: 480px) {
+    // 
+    //     }
+    //   }
+    // }
 
     .pure-menu-link {
         padding: 15px;
@@ -234,17 +279,152 @@ table {
 
 #home-container {
 
+
+    #projects {
+        min-height: 190px;
+        #projects-buttons{
+            .projects-button{
+                margin: 10px;
+                background-color: $main-grey-dark;
+                color: $text-grey;
+                padding: 10px 20px;
+                border-radius: 10px;
+                text-align: center;
+                svg{
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 5px;
+                    width: 100px;
+                    fill: $text-grey;
+                }
+
+                &:hover {
+                    background-color: $main-red;
+                    color: $main-grey-light;
+                    svg{
+                        fill: $main-grey-light;
+                    }
+                }
+            }
+        }
+    }
     #main-title-container{
 
-        padding: 20px;
+        margin-bottom: 20px;
+        margin-left: 10px;
 
-    .title-inline {
-        display: inline;
+        .title-inline {
+          display: inline;
+        }
+
+        #my-name {
+          display: inline;
+          color: $main-blue;
+        }
     }
 
-    #my-name {
-        display: inline;
-        color: $main-blue;
+    #section-card-grid {
+
+        a {
+            color: $text-grey;
+            &:visited {
+                color: $text-grey;
+            }
+        }
+
+        margin: 20px -10px;
+
+        .section-card-wrapper {
+
+            &>* {
+                height: 100%;
+            }
+        }
+
+        .section-card {
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            background-color: $main-grey-light;
+
+            &:hover {
+                // background-color: $main-grey;
+                h2 {
+                    color: $main-red;
+                }
+            }
+
+
+
+            .img-container {
+                padding: 10px;
+                margin-left: auto;;
+                margin-right: auto;
+                max-width: 310px;
+                background-color: $main-grey-dark;
+
+                img{
+                    width: 100%;
+                    max-width: 310px;
+                }
+            }
+        }
+
+        .links-container {
+
+            h2 {
+                margin: 0;
+            }
+
+            display: inline-block;
+            margin: 0 auto;
+            width: 100%;
+            &>* {
+                margin-left: 4.2%;
+                margin-right: 4.2%;
+                margin-top: 10px;
+            }
+        }
+
+        .itch-container {
+            clear: right;
+            display: inline-block;
+
+            .small {
+                width: 28px;
+            }
+            .big {
+                width: 42px;
+            }
+
+            .itch-logo {
+
+                margin: 0;
+                padding: 2px 0;
+                fill: $text-grey;
+
+                &:hover {
+                        fill: $main-red;
+                }
+            }
+        }
+
+        .link-logo {
+            vertical-align: top;
+            line-height: 0;
+            display: inline-block;
+
+            &:hover {
+                color: $main-red;
+            }
+
+            i.icon-check:before {
+                left: 0;
+                position: absolute;
+                top: -4px;
+            }
+        }
+
     }
-}
+
 }
