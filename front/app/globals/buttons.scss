@@ -1,5 +1,5 @@
 .pure-button{
-    border-radius: 1px;
+    border-radius: 3px;
 }
 
 .b-blue {
@@ -12,4 +12,31 @@
     &:active {
         background-color: $main-blue-light;
     }
+    
+    &.b-down {
+        background-color: $main-blue-dark;
+    }
+}
+
+.b-group {
+    
+    display: inline-block;
+    
+    &>*{
+        float: left;
+        border-radius: 0;
+        border-right: solid $main-grey 1px;
+    }
+        
+    .pure-button:first-child {
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    
+    .pure-button:last-child {
+        border-right: none;
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    
 }

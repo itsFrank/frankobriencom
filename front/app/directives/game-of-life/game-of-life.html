@@ -9,27 +9,95 @@
                     </td>
                 </tr>
             </table>
+            <div class="b-group gol-buttons">
+                    <button class="pure-button b-blue" ng-class="{'b-down' : running}" ng-click="toggle_game_run()" ><i class="fa fa-play"></i></button>
+                    <button class="pure-button b-blue" ng-class="{'b-down' : !running}" ng-click="toggle_game_run()" ><i class="fa fa-pause"></i></button>
+                    <button class="pure-button b-blue" ng-click="clearGrid()" ><i class="fa fa-times"></i></button>
+                    <button class="pure-button b-blue" ng-click="resetGrid()" ><i class="fa fa-random"></i></i>
+                </div>
         </div>
         <div class="pure-u-1 pure-u-md-2-3">
-            <table id="gol-menu">
-                <tr>
-                    <td><a class="b-blue pure-button" ng-click="resetGrid()">Randomize</a></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><a class="b-blue pure-button" ng-click="clearGrid()">Clear</a></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><a class="b-blue pure-button" ng-click="toggle_game_run()">{{running ? 'Pause' : 'Play'}}</a></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-
-            </table>
+            <div id="gol-menu">
+                <div id="gol-headder">
+                    <h3>Conway's Game of Life</h3>
+                    <div content="Conway's game of life is a simple simulation where a lit square represents a live cell and a dark one a dead cell, click 'What is this?' for more info" class="gol-mouseover tooltip"><i class="fa fa-question-circle"></i></div>
+                <div>{{test}}</div>
+                </div>
+                <div class="pure-g gol-tab-table">
+                    <div class="pure-u-1-4">
+                        <ul class="gol-selectors">
+                            <li class="gol-tab-button" ng-class="{'active' : current_tab === 2}" ng-click="tab_to(2)">Presets</li>
+                            <li class="gol-tab-button" ng-class="{'active' : current_tab === 1}" ng-click="tab_to(1)">Settings</li>
+                            <li class="gol-tab-button" ng-class="{'active' : current_tab === 0}" ng-click="tab_to(0)">What is this?</li>
+                        </ul>
+                    </div>
+                    <div id="gol-content" class="pure-u-3-4">
+                        <div ng-if="current_tab === 0" class="gol-tab-content">
+                            <p>The grid on the left is Conway's game of life, a simple simpulation of population change, also called a cellular automaton</p>
+                            <br>
+                            <p>In the simulation, a lit (green) cell is alive and a dark one is dead, the state of a cell at each iteration is detemined by the following rules:</p>
+                            <ul>
+                                <li>A live cell with less than two live neighbours dies</li>
+                                <li>A live cell with two or three live neighbors lives</li>
+                                <li>A live cell more than three live neighbors lives</li>
+                                <li>A dead cell with three live neighbours become alive</li>
+                            </ul>
+                            
+                            <p>You can pause the simulation or click on any cell to toggle its state. Use the 'x' to clear the grid or the shuffle button to generate a new random grid</p>
+                            <br>
+                            <p>This automaton has many usses past making interesting animations, I used it as a basis for procedural cavern generation in a game project, and it has many more uses.</p>
+                            <br>
+                            <p>If you want to know more about Conway's game of life and its uses you can read its <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">wikipedia</a> page.</p>
+                        </div>
+                        <div ng-if="current_tab === 1" class="gol-tab-content">
+                            <ul>
+                                <li>Update time:
+                                <span id="gol-slider">
+                                    <input type="range" name="rangeInput" min="0" max="5" step="0.1" ng-model="settings.speed" ng-change="speedChange(settings.speed)">                                                       
+                                    <span>{{settings.speed}}s</span>
+                                </span>
+                                <li>Wrapping Edges <i ng-click="toggleWrap()" class="gol-check fa fa-check-square" ng-class="{'off' : settings.wrap == false}"></i></li>
+                            </ul>
+                        </div>
+                        <div ng-if="current_tab === 2" class="gol-tab-content">
+                            <div class="pure-g">
+                                <div class="pure-u-1-3">
+                                    <h4>Gliders</h4>
+                                    <div class="gol-b-grp">
+                                        <button ng-click="setPreset(presets.glider)" class="pure-button b-blue"><p>Gliders</p></button>
+                                        <button ng-click="setPreset(presets.spaceship)" class="pure-button b-blue"><p>Spaceship</p></button>
+                                        <button ng-click="setPreset(presets.ants)" class="pure-button b-blue"><p>Ants</p></button>
+                                    </div>
+                                </div>
+                                <div class="pure-u-1-3">
+                                    <h4>Ossilators</h4>
+                                    <div class="gol-b-grp">
+                                        <button ng-click="setPreset(presets.figureeight)" class="pure-button b-blue"><p>Figure Eight</p></button>
+                                        <button ng-click="setPreset(presets.pentapole)" class="pure-button b-blue"><p>Penta Pole</p></button>
+                                        <button ng-click="setPreset(presets.bars)" class="pure-button b-blue"><p>Bar</p></button>
+                                        <button ng-click="setPreset(presets.unix)" class="pure-button b-blue"><p>Unix</p></button>
+                                        <button ng-click="setPreset(presets.tumbler)" class="pure-button b-blue"><p>Tumbler</p></button>
+                                    </div>
+                                </div>
+                                <div class="pure-u-1-3">
+                                    <h4>Stills</h4>
+                                    <div class="gol-b-grp">
+                                        <button  ng-click="setPreset(presets.beehive)" class="pure-button b-blue"><p>Beehive</p></button>
+                                        <button  ng-click="setPreset(presets.block)" class="pure-button b-blue"><p>Block</p></button>
+                                        <button  ng-click="setPreset(presets.integral)" class="pure-button b-blue"><p>Integral</p></button>
+                                        <button  ng-click="setPreset(presets.angryman)" class="pure-button b-blue"><p>Angry Man</p></button>
+                                        <button  ng-click="setPreset(presets.tables)" class="pure-button b-blue"><p>Tables</p></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div id="speed-range">
+                    <input type="range" name="rangeInput" min="0" max="5" step="0.1" ng-model="speed" ng-change="speedChange()">                                                       
+                    <p>{{speed}}</p>
+                </div>-->
+            </div>
         </div>
     </div>
 </div>
